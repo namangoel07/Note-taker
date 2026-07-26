@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Note Craft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="desk">
+
+    <!-- Sidebar -->
+    <aside class="rail">
+      <div class="brand">
+        <span class="brand-mark">NC</span>
+        <div class="brand-text">
+          <span class="brand-title">Note Craft</span>
+          <span class="brand-sub">your desk, tidied</span>
+        </div>
+      </div>
+
+      <nav class="tabs">
+        <button class="tab active" id="allNotesBtn"><span class="tab-num">01</span> All notes</button>
+        <button class="tab" id="calendarBtn"><span class="tab-num">02</span> Calendar</button>
+        <button class="tab" id="archiveBtn"><span class="tab-num">03</span> Archive</button>
+        <button class="tab" id="trashBtn"><span class="tab-num">04</span> Trash</button>
+      </nav>
+
+      <div class="rail-footer">
+        <span id="userEmail" class="user-email">Saved locally</span>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="board">
+      <header class="board-header">
+        <h1 id="boardTitle">All notes</h1>
+        <p class="board-hint" id="boardHint">Everything you've jotted down, in one place.</p>
+      </header>
+
+      <form id="noteForm" class="note-form">
+        <div class="form-row">
+          <input type="text" id="noteTitle" placeholder="Give it a title…" required />
+          <input type="date" id="reminderDate" title="Optional reminder date" />
+        </div>
+        <textarea id="noteContent" placeholder="Write what's on your mind…" required></textarea>
+        <button type="submit">Pin note</button>
+      </form>
+
+      <div id="notes-container" class="notes-container"></div>
+
+      <section id="calendarSection" class="calendar-section hidden">
+        <div class="calendar-head">
+          <h2 id="calendarMonthLabel">This month</h2>
+          <span class="calendar-hint">Dates with a dot have reminders — click one to see it.</span>
+        </div>
+        <div class="weekday-row">
+          <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+        </div>
+        <div id="calendar-grid" class="calendar-grid"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

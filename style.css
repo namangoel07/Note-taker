@@ -1,0 +1,397 @@
+/* ============================================================
+   Note Craft — "desk & index card" theme
+   Deep ink desk surface, warm paper cards, hand-tabbed sidebar.
+   ============================================================ */
+
+:root {
+  --ink: #1E2A22;
+  --ink-soft: #263329;
+  --paper: #F7F1E3;
+  --paper-dim: #EDE4CE;
+  --line: rgba(30, 42, 34, 0.14);
+  --mustard: #E3A32B;
+  --rose: #C9667A;
+  --teal: #4F8C82;
+  --sky: #5C86A8;
+  --text: #201E17;
+  --muted: #8B9188;
+  --muted-on-ink: #A9B6AC;
+
+  --font-display: "Fraunces", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "Consolas", monospace;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--ink);
+  color: var(--text);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(255,255,255,0.035) 1px, transparent 0);
+  background-size: 22px 22px;
+}
+
+.desk {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ("tabbed rail") ---------- */
+.rail {
+  background: var(--ink-soft);
+  color: var(--muted-on-ink);
+  padding: 1.75rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  border-right: 1px solid rgba(0,0,0,0.25);
+}
+
+.brand { display: flex; align-items: center; gap: 0.7rem; }
+
+.brand-mark {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--ink);
+  background: var(--mustard);
+  width: 36px; height: 36px;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  transform: rotate(-4deg);
+}
+
+.brand-text { display: flex; flex-direction: column; line-height: 1.2; }
+.brand-title { font-family: var(--font-display); font-size: 1.15rem; color: var(--paper); font-weight: 600; }
+.brand-sub { font-size: 0.72rem; color: var(--muted-on-ink); font-family: var(--font-mono); letter-spacing: 0.02em; }
+
+.tabs { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.tab {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.65rem 0.75rem;
+  border-radius: 7px;
+  font-size: 0.92rem;
+  color: var(--muted-on-ink);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab-num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: rgba(169, 182, 172, 0.55);
+  min-width: 1.4rem;
+}
+
+.tab:hover { background: rgba(255,255,255,0.05); color: var(--paper); }
+
+.tab.active {
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 600;
+}
+.tab.active .tab-num { color: var(--rose); }
+
+.rail-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  padding-top: 1rem;
+}
+
+.user-email {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted-on-ink);
+  word-break: break-all;
+}
+
+.logout-btn {
+  all: unset;
+  cursor: pointer;
+  text-align: center;
+  font-size: 0.82rem;
+  font-weight: 500;
+  padding: 0.5rem;
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 6px;
+  color: var(--paper);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+.logout-btn:hover { border-color: var(--rose); background: rgba(201,102,122,0.12); }
+
+/* ---------- Main board ---------- */
+.board {
+  background: var(--paper);
+  border-radius: 22px 0 0 22px;
+  margin: 14px 14px 14px 0;
+  padding: 2.25rem 2.75rem;
+  overflow-y: auto;
+  box-shadow: -4px 0 24px rgba(0,0,0,0.18);
+}
+
+.board-header { margin-bottom: 1.5rem; }
+.board-header h1 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--text);
+}
+.board-hint { color: var(--muted); font-size: 0.92rem; margin-top: 0.2rem; }
+
+/* ---------- Note form ---------- */
+.note-form {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.03);
+}
+
+.form-row { display: flex; gap: 0.6rem; }
+
+.note-form input[type="text"] {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.note-form input[type="date"] {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 0.3rem 0.5rem;
+  background: var(--paper-dim);
+  color: var(--muted);
+}
+
+.note-form textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  border: none;
+  outline: none;
+  resize: vertical;
+  min-height: 60px;
+  background: transparent;
+  line-height: 1.5;
+}
+
+.note-form button {
+  align-self: flex-end;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.88rem;
+  background: var(--ink);
+  color: var(--paper);
+  border: none;
+  padding: 0.55rem 1.1rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+.note-form button:hover { background: var(--teal); }
+.note-form button:active { transform: scale(0.97); }
+
+/* ---------- Notes grid: tilted index cards ---------- */
+.notes-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+
+.card {
+  --tilt: -1.5deg;
+  background: #fff;
+  width: 240px;
+  min-height: 150px;
+  padding: 1.1rem 1.1rem 1rem;
+  border-radius: 3px;
+  border: 1px solid var(--line);
+  position: relative;
+  transform: rotate(var(--tilt));
+  box-shadow: 0 3px 8px rgba(30,42,34,0.10), 0 1px 0 rgba(0,0,0,0.03);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.card:nth-child(3n+1) { --tilt: 1.2deg; }
+.card:nth-child(3n+2) { --tilt: -1.6deg; }
+.card:nth-child(3n)   { --tilt: 0.6deg; }
+
+.card:hover {
+  transform: rotate(0deg) translateY(-3px);
+  box-shadow: 0 10px 20px rgba(30,42,34,0.16);
+  z-index: 2;
+}
+
+/* pin dot, colored per note */
+.card::before {
+  content: "";
+  position: absolute;
+  top: -7px; left: 18px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--pin, var(--mustard));
+  box-shadow: 0 2px 3px rgba(0,0,0,0.25);
+}
+
+.card.yellow { --pin: var(--mustard); border-top: 3px solid var(--mustard); }
+.card.red    { --pin: var(--rose);    border-top: 3px solid var(--rose); }
+.card.blue   { --pin: var(--sky);     border-top: 3px solid var(--sky); }
+.card.purple { --pin: var(--teal);    border-top: 3px solid var(--teal); }
+
+.card-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+  color: var(--text);
+  padding-right: 1.2rem;
+}
+
+.card p {
+  font-size: 0.88rem;
+  color: #4a463c;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.card small {
+  display: block;
+  margin-top: 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
+.card-menu {
+  position: absolute;
+  top: 6px; right: 8px;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--muted);
+  padding: 0.1rem 0.4rem;
+  border-radius: 5px;
+  line-height: 1;
+}
+.card-menu:hover { background: var(--paper-dim); color: var(--text); }
+
+.empty-msg {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+  padding: 2rem 0;
+}
+
+/* ---------- Context menu ---------- */
+.context-menu {
+  position: absolute;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 1000;
+  min-width: 140px;
+}
+.context-menu button {
+  all: unset;
+  cursor: pointer;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.85rem;
+  font-family: var(--font-body);
+  color: var(--text);
+}
+.context-menu button:hover { background: var(--paper-dim); }
+
+/* ---------- Calendar ---------- */
+.hidden { display: none !important; }
+
+.calendar-section { margin-top: 0.5rem; }
+.calendar-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.calendar-head h2 { font-family: var(--font-display); font-size: 1.3rem; }
+.calendar-hint { font-size: 0.8rem; color: var(--muted); }
+
+.weekday-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+.weekday-row span {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.5rem;
+}
+
+.calendar-day {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 0.9rem 0.4rem 0.6rem;
+  border-radius: 8px;
+  text-align: center;
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.calendar-day:hover { background: var(--paper-dim); border-color: var(--teal); }
+
+.reminder-dot {
+  width: 6px; height: 6px;
+  background: var(--rose);
+  border-radius: 50%;
+  position: absolute;
+  bottom: 6px; left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ---------- Scrollbar (subtle) ---------- */
+.board::-webkit-scrollbar { width: 10px; }
+.board::-webkit-scrollbar-thumb { background: var(--line); border-radius: 6px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 780px) {
+  .desk { grid-template-columns: 1fr; }
+  .rail { flex-direction: row; align-items: center; padding: 1rem; gap: 1rem; overflow-x: auto; }
+  .brand-sub { display: none; }
+  .tabs { flex-direction: row; }
+  .rail-footer { margin-top: 0; flex-direction: row; border-top: none; padding-top: 0; margin-left: auto; }
+  .user-email { display: none; }
+  .board { border-radius: 0; margin: 0; }
+  .card { width: 100%; }
+}
